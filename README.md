@@ -1,4 +1,4 @@
-Media Priority-Mode
+Media-Mute in Priority-Mode
 ===========
 
 When enabling the "priority mode" on Android 5.0 (Lollipop), apps are still able to play sounds through the "music" audio stream.
