@@ -9,14 +9,14 @@
     <TextView
         android:text="@string/summary"
         android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:layout_height="wrap_content"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/show_icon"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:layout_marginTop="10dp"
         android:checked="true"
         android:id="@+id/launchericon"/>
@@ -32,20 +32,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/listener_enabled"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:layout_marginBottom="10dp"
             android:clickable="false"
             android:id="@+id/listenerenabled"/>
 
         <TextView
-            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
             android:text="@string/listener_summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:textStyle="bold"
-            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:text="@string/listener_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

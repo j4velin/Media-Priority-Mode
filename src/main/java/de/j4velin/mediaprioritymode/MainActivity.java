@@ -19,6 +19,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -35,8 +36,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        boolean listenerEnabled = getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
-                .getBoolean("listenerEnabled", false);
+        // no need for the listener before Lollipop
+        boolean listenerEnabled = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ||
+                getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
+                        .getBoolean("listenerEnabled", false);
         if (listenerEnabled) {
             findViewById(R.id.listenerwarning).setVisibility(View.GONE);
             findViewById(R.id.launchericon).setVisibility(View.VISIBLE);

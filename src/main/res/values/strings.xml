@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Media-Mute in Priority-Mode</string>
-    <string name="summary">This app will automatically mute the \'music\' audio stream on your device, once it enters priority mode (and restore its volume when leaving priority mode).\nThis way, even music and video apps as well as most games will be muted while in priority mode.\nOf course, you can overwrite the set volume at any time using the volume buttons of your device.</string>
+    <string name="app_name">Media-Mute</string>
+    <string name="summary">This app will automatically mute the \'music\' audio stream on your device, once it enters silent mode (and restore its volume when leaving silent mode).\nThis way, even music and video apps as well as most games will be muted while in silent mode.\nOf course, you can overwrite the set volume at any time using the volume buttons of your device.</string>
     <string name="show_icon">Show app icon in launcher</string>
-    <string name="listener_enabled">Notification listener enabled</string>
-    <string name="listener_summary">The app needs to be enabled as \'notification listener\' to detect changes in the priority mode setting. Please click here to enable the notification listener service.</string>
-    <string name="listener_warning">The app won\'t do anything if the notification listener is not enabled!</string>
 </resources>

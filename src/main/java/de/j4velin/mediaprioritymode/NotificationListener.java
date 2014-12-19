@@ -1,9 +1,11 @@
 package de.j4velin.mediaprioritymode;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.service.notification.NotificationListenerService;
 
@@ -22,6 +24,8 @@ import android.service.notification.NotificationListenerService;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class NotificationListener extends NotificationListenerService {
 
     @Override
