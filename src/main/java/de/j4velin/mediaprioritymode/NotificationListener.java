@@ -30,6 +30,7 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public IBinder onBind(final Intent mIntent) {
+        if (BuildConfig.DEBUG) Logger.log("NotificationListener::onBind");
         getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS).edit()
                 .putBoolean("listenerEnabled", true).commit();
         return super.onBind(mIntent);
@@ -37,6 +38,7 @@ public class NotificationListener extends NotificationListenerService {
 
     @Override
     public boolean onUnbind(final Intent mIntent) {
+        if (BuildConfig.DEBUG) Logger.log("NotificationListener::onUnbind");
         getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS).edit()
                 .putBoolean("listenerEnabled", false).commit();
         return super.onUnbind(mIntent);
@@ -51,12 +53,19 @@ public class NotificationListener extends NotificationListenerService {
         AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         if (inPriority) {
             int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (BuildConfig.DEBUG) Logger.log(
+                    "NotificationListener - in priority mode, current volume: " + currentVolume);
             if (currentVolume > 0) {
                 prefs.edit().putInt("media_volume", currentVolume).apply();
+                if (BuildConfig.DEBUG)
+                    Logger.log("NotificationListener - changing STREAM_MUSIC volume to 0");
                 am.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
                         AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
             }
         } else {
+            if (BuildConfig.DEBUG) Logger.log(
+                    "NotificationListener - changing STREAM_MUSIC volume to 0: " +
+                            prefs.getInt("media_volume", 128));
             am.setStreamVolume(AudioManager.STREAM_MUSIC, prefs.getInt("media_volume", 128), 0);
         }
     }

@@ -24,6 +24,7 @@ import android.media.AudioManager;
 public class AudioReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
+        if (BuildConfig.DEBUG) Logger.log("AudioReceiver: " + intent.getAction());
         boolean silent = intent.getIntExtra(AudioManager.EXTRA_RINGER_MODE, -1) !=
                 AudioManager.RINGER_MODE_NORMAL;
         SharedPreferences prefs =
@@ -31,12 +32,18 @@ public class AudioReceiver extends BroadcastReceiver {
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         if (silent) {
             int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (BuildConfig.DEBUG)
+                Logger.log("AudioReceiver - in silent mode, current volume: " + currentVolume);
             if (currentVolume > 0) {
                 prefs.edit().putInt("media_volume", currentVolume).apply();
+                if (BuildConfig.DEBUG)
+                    Logger.log("AudioReceiver - changing volume STREAM_MUSIC to 0");
                 am.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
                         AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
             }
         } else {
+            if (BuildConfig.DEBUG) Logger.log("AudioReceiver - changing volume STREAM_MUSIC to " +
+                    prefs.getInt("media_volume", 128));
             am.setStreamVolume(AudioManager.STREAM_MUSIC, prefs.getInt("media_volume", 128), 0);
         }
     }
