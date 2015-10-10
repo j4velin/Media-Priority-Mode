@@ -16,43 +16,16 @@
 package de.j4velin.mediaprioritymode;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.CheckBox;
-
 
 public class MainActivity extends Activity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // no need for the listener before Lollipop
-        boolean listenerEnabled = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ||
-                getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
-                        .getBoolean("listenerEnabled", false);
-        if (listenerEnabled) {
-            findViewById(R.id.listenerwarning).setVisibility(View.GONE);
-            findViewById(R.id.launchericon).setVisibility(View.VISIBLE);
-        } else {
-            findViewById(R.id.launchericon).setVisibility(View.GONE);
-            findViewById(R.id.listenerwarning).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    startActivity(
-                            new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"));
-                }
-            });
-        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Media-Mute</string>
-    <string name="summary">This app will automatically mute the \'music\' audio stream on your device, once it enters silent mode (and restore its volume when leaving silent mode).\nThis way, even music and video apps as well as most games will be muted while in silent mode.\nOf course, you can overwrite the set volume at any time using the volume buttons of your device.</string>
+    <string name="summary">This app will automatically mute the \'music\' audio stream on your device, once it enters silent/vibration mode (and restore its volume when going to ringer mode again).\nThis way, even music and video apps as well as most games will be muted while in silent/vibration mode.\nOf course, you can overwrite the set volume at any time using the volume buttons of your device.</string>
     <string name="show_icon">Show app icon in launcher</string>
 </resources>
