@@ -15,9 +15,15 @@
  */
 package de.j4velin.mediaprioritymode;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
 import android.widget.CheckBox;
 
 public class MainActivity extends Activity {
@@ -26,6 +32,31 @@ public class MainActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (BuildConfig.DEBUG && Build.VERSION.SDK_INT >= 23 && getPackageManager()
+                .checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName()) !=
+                PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // notification listener is only required on API 21
+        if (Build.VERSION.SDK_INT == 21 &&
+                !getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
+                        .getBoolean("listenerEnabled", false)) {
+            findViewById(R.id.launchericon).setVisibility(View.GONE);
+            findViewById(R.id.listenerwarning).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
+                }
+            });
+        } else {
+            findViewById(R.id.listenerwarning).setVisibility(View.GONE);
+            findViewById(R.id.launchericon).setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
