@@ -45,6 +45,8 @@
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 
         <TextView
+            android:id="@+id/wontdoanything"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/listener_warning"

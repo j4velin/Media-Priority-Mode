@@ -43,7 +43,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         // notification listener is only required on API 21
-        if (Build.VERSION.SDK_INT == 21 &&
+        // AND on API 22 on Samsung devices -.-
+        boolean notificationListenerRequired = Build.VERSION.SDK_INT == 21 ||
+                (Build.VERSION.SDK_INT == 22 &&
+                        Build.MANUFACTURER.toLowerCase().contains("samsung"));
+        if (notificationListenerRequired &&
                 !getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
                         .getBoolean("listenerEnabled", false)) {
             findViewById(R.id.launchericon).setVisibility(View.GONE);
@@ -53,6 +57,11 @@ public class MainActivity extends Activity {
                     startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS));
                 }
             });
+
+            // Samsung has implement a silent mode and a priority mode, which aren't the same
+            // the notification listener is only required to detect the priority mode
+            if (Build.MANUFACTURER.toLowerCase().contains("samsung"))
+                findViewById(R.id.wontdoanything).setVisibility(View.GONE);
         } else {
             findViewById(R.id.listenerwarning).setVisibility(View.GONE);
             findViewById(R.id.launchericon).setVisibility(View.VISIBLE);
