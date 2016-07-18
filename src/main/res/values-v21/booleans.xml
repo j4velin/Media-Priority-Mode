@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="belowLollipop">false</bool>
-    <bool name="atLeastLollipop">true</bool>
+    <bool name="lollipop">true</bool>
 </resources>

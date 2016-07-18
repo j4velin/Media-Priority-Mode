@@ -1,14 +1,3 @@
-package de.j4velin.mediaprioritymode;
-
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.os.Build;
-import android.os.IBinder;
-import android.service.notification.NotificationListenerService;
-
 /*
  * Copyright 2014 Thomas Hoffmann
  *
@@ -24,6 +13,16 @@ import android.service.notification.NotificationListenerService;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package de.j4velin.mediaprioritymode;
+
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.os.Build;
+import android.os.IBinder;
+import android.service.notification.NotificationListenerService;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class NotificationListener extends NotificationListenerService {
@@ -47,10 +46,10 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public void onInterruptionFilterChanged(final int interruptionFilter) {
         boolean inPriority =
-                interruptionFilter == NotificationListenerService.INTERRUPTION_FILTER_PRIORITY ||
-                        interruptionFilter == NotificationListenerService.INTERRUPTION_FILTER_NONE;
+                interruptionFilter != NotificationListenerService.INTERRUPTION_FILTER_ALL;
         SharedPreferences prefs = getSharedPreferences("audio_setting", Context.MODE_PRIVATE);
         AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        if (BuildConfig.DEBUG) Logger.log("onInterruptionFilterChanged " + interruptionFilter);
         if (inPriority) {
             int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
             if (BuildConfig.DEBUG) Logger.log(
@@ -64,7 +63,7 @@ public class NotificationListener extends NotificationListenerService {
             }
         } else {
             if (BuildConfig.DEBUG) Logger.log(
-                    "NotificationListener - changing STREAM_MUSIC volume to 0: " +
+                    "NotificationListener - changing STREAM_MUSIC volume to : " +
                             prefs.getInt("media_volume", 128));
             am.setStreamVolume(AudioManager.STREAM_MUSIC, prefs.getInt("media_volume", 128), 0);
         }

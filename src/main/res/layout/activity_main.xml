@@ -2,52 +2,57 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:orientation="vertical"
               android:padding="10dp"
-              tools:context="de.j4velin.mediaprioritymode.MainActivity"
-              android:orientation="vertical">
+              tools:context="de.j4velin.mediaprioritymode.MainActivity">
+
 
     <TextView
-        android:text="@string/summary"
-        android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:layout_height="wrap_content"/>
-
-    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_icon"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:text="@string/summary"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
+
+    <CheckBox
+        android:id="@+id/launchericon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:checked="true"
-        android:id="@+id/launchericon"/>
+        android:text="@string/show_icon"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:id="@+id/listenerwarning"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <CheckBox
+            android:id="@+id/listenerenabled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/listener_enabled"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:layout_marginBottom="10dp"
             android:clickable="false"
-            android:id="@+id/listenerenabled"/>
+            android:text="@string/listener_enabled"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"/>
 
         <TextView
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/listener_summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 
         <TextView
-            android:textStyle="bold"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-            android:text="@string/listener_warning"
+            android:id="@+id/wontdoanything"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/listener_warning"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textStyle="bold"/>
     </LinearLayout>
+
+
 </LinearLayout>

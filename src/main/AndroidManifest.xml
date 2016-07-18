@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="de.j4velin.mediaprioritymode"
-          android:installLocation="auto"
-          android:versionCode="103"
-          android:versionName="1.0.3">
+<manifest
+    package="de.j4velin.mediaprioritymode"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="auto"
+    android:versionCode="107"
+    android:versionName="1.0.7">
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="21"/>
+        android:targetSdkVersion="23"/>
 
     <application
         android:allowBackup="true"
@@ -15,21 +16,8 @@
         android:label="@string/app_name"
         android:theme="@style/main">
 
-        <service
-            android:name=".NotificationListener"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
-            android:process=":background"
-            android:enabled="@bool/atLeastLollipop">
-            <intent-filter>
-                <action android:name="android.service.notification.NotificationListenerService"/>
-            </intent-filter>
-        </service>
-
         <receiver
-            android:name=".AudioReceiver"
-            android:process=":background"
-            android:enabled="@bool/belowLollipop">
+            android:name=".AudioReceiver">
             <intent-filter>
                 <action android:name="android.media.RINGER_MODE_CHANGED"/>
             </intent-filter>
@@ -44,6 +32,17 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".NotificationListener"
+            android:enabled="@bool/lollipop"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
