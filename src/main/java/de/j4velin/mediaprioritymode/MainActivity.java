@@ -43,12 +43,12 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         // notification listener is only required on API 21
-        // AND on API 22 on Samsung devices -.-
+        // AND on API 22+ on Samsung devices -.-
         boolean notificationListenerRequired = Build.VERSION.SDK_INT == 21 ||
-                (Build.VERSION.SDK_INT == 22 &&
+                (Build.VERSION.SDK_INT >= 22 &&
                         Build.MANUFACTURER.toLowerCase().contains("samsung"));
         if (notificationListenerRequired &&
-                !getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS)
+                !getSharedPreferences("listener_setting", Context.MODE_PRIVATE)
                         .getBoolean("listenerEnabled", false)) {
             findViewById(R.id.launchericon).setVisibility(View.GONE);
             findViewById(R.id.listenerwarning).setOnClickListener(new View.OnClickListener() {

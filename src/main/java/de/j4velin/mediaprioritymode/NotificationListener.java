@@ -30,16 +30,16 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public IBinder onBind(final Intent mIntent) {
         if (BuildConfig.DEBUG) Logger.log("NotificationListener::onBind");
-        getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS).edit()
-                .putBoolean("listenerEnabled", true).commit();
+        getSharedPreferences("listener_setting", Context.MODE_PRIVATE).edit()
+                .putBoolean("listenerEnabled", true).apply();
         return super.onBind(mIntent);
     }
 
     @Override
     public boolean onUnbind(final Intent mIntent) {
         if (BuildConfig.DEBUG) Logger.log("NotificationListener::onUnbind");
-        getSharedPreferences("listener_setting", Context.MODE_MULTI_PROCESS).edit()
-                .putBoolean("listenerEnabled", false).commit();
+        getSharedPreferences("listener_setting", Context.MODE_PRIVATE).edit()
+                .putBoolean("listenerEnabled", false).apply();
         return super.onUnbind(mIntent);
     }
 
