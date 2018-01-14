@@ -19,12 +19,14 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 public class MainActivity extends Activity {
 
@@ -42,6 +44,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
         // notification listener is only required on API 21
         // AND on API 22+ on Samsung devices -.-
         boolean notificationListenerRequired = Build.VERSION.SDK_INT == 21 ||
@@ -66,6 +69,18 @@ public class MainActivity extends Activity {
             findViewById(R.id.listenerwarning).setVisibility(View.GONE);
             findViewById(R.id.launchericon).setVisibility(View.VISIBLE);
         }
+
+        final SharedPreferences audioSettings = getSharedPreferences("audio_setting", Context.MODE_PRIVATE);
+        CheckBox dontRestoreIfChanged = (CheckBox) findViewById(R.id.dontrestoreifchanged);
+
+        dontRestoreIfChanged.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                audioSettings.edit().putBoolean("dont_restore_if_changed", isChecked).apply();
+            }
+        });
+
+        dontRestoreIfChanged.setChecked(audioSettings.getBoolean("dont_restore_if_changed", false));
     }
 
     @Override
