@@ -6,5 +6,5 @@
     <string name="listener_enabled">Notification listener enabled</string>
     <string name="listener_summary">The app needs to be enabled as \'notification listener\' to detect changes in the priority mode setting. Please click here to enable the notification listener service.</string>
     <string name="listener_warning">The app won\'t do anything if the notification listener is not enabled!</string>
-    <string name="dont_restore_if_changed">Don\'t restore volume if changed</string>
+    <string name="dont_restore_if_changed">Don\'t restore volume if changed during DND</string>
 </resources>
