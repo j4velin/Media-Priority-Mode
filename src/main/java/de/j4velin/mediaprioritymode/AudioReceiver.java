@@ -27,11 +27,18 @@ public class AudioReceiver extends BroadcastReceiver {
         if (BuildConfig.DEBUG) Logger.log("AudioReceiver: " + intent.getAction());
         boolean silent = intent.getIntExtra(AudioManager.EXTRA_RINGER_MODE, -1) !=
                 AudioManager.RINGER_MODE_NORMAL;
+
         SharedPreferences prefs =
                 context.getSharedPreferences("audio_setting", Context.MODE_PRIVATE);
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+
+        boolean dontRestoreIfChanged = prefs.getBoolean("dont_restore_if_changed", false);
+        int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
+        boolean shouldRestore = !dontRestoreIfChanged || currentVolume == 0;
+
+        if (BuildConfig.DEBUG) Logger.log("AudioReceiver - should restore: " + shouldRestore);
+
         if (silent) {
-            int currentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
             if (BuildConfig.DEBUG)
                 Logger.log("AudioReceiver - in silent mode, current volume: " + currentVolume);
             if (currentVolume > 0) {
@@ -41,7 +48,7 @@ public class AudioReceiver extends BroadcastReceiver {
                 am.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
                         AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
             }
-        } else {
+        } else if (shouldRestore) {
             if (BuildConfig.DEBUG) Logger.log("AudioReceiver - changing volume STREAM_MUSIC to " +
                     prefs.getInt("media_volume", 128));
             am.setStreamVolume(AudioManager.STREAM_MUSIC, prefs.getInt("media_volume", 128), 0);

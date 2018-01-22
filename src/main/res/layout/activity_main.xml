@@ -6,7 +6,6 @@
               android:padding="10dp"
               tools:context="de.j4velin.mediaprioritymode.MainActivity">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,5 +53,12 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-
+    <CheckBox
+        android:id="@+id/dontrestoreifchanged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:checked="false"
+        android:text="@string/dont_restore_if_changed"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"/>
 </LinearLayout>
