@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+	compileSdkVersion 29
+    defaultConfig {
+        applicationId "de.j4velin.mediaprioritymode"
+        minSdkVersion 14
+    }
+    signingConfigs {
+        release
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+def props = new Properties()
+
+if (project.file("key.properties").exists()) {
+    props.load(new FileInputStream(project.file("key.properties")))
+} else {
+    logger.warn('Using sample keystore!!')
+    props.load(new FileInputStream(project.file("key.properties.sample")))
+}
+
+android.signingConfigs.release.storeFile project.file(props.keyStore)
+
+android.signingConfigs.release.storePassword props.keyStorePassword
+
+android.signingConfigs.release.keyAlias props.keyAlias
+
+android.signingConfigs.release.keyPassword props.keyAliasPassword

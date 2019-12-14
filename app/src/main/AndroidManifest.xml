@@ -6,9 +6,7 @@
     android:versionCode="108"
     android:versionName="1.0.8">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="23"/>
+    <uses-sdk android:targetSdkVersion="23"/>
 
     <application
         android:allowBackup="true"
